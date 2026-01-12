@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools-scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "djangorestframework-stubs"
+version = "0.1.0"
+description = "Type stubs for Django REST Framework"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
+]
+dependencies = [
+    "django>=3.2",
+    "djangorestframework>=3.12",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/rest_framework-stubs"
+"Bug Tracker" = "https://github.com/yourusername/rest_framework-stubs/issues"
+
+[tool.setuptools]
+packages = ["rest_framework", "rest_framework.authtoken", "rest_framework.authtoken.management", 
+            "rest_framework.authtoken.management.commands", "rest_framework.management", 
+            "rest_framework.management.commands", "rest_framework.schemas", 
+            "rest_framework.templatetags", "rest_framework.utils"]
+
+[tool.setuptools.package-data]
+"rest_framework" = ["py.typed", "*.pyi"]
+"rest_framework.authtoken" = ["*.pyi"]
+"rest_framework.authtoken.management" = ["*.pyi"]
+"rest_framework.authtoken.management.commands" = ["*.pyi"]
+"rest_framework.management" = ["*.pyi"]
+"rest_framework.management.commands" = ["*.pyi"]
+"rest_framework.schemas" = ["*.pyi"]
+"rest_framework.templatetags" = ["*.pyi"]
+"rest_framework.utils" = ["*.pyi"]
