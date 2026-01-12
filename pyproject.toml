@@ -22,16 +22,16 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Typing :: Typed",
 ]
 dependencies = [
-    "django>=3.2",
     "djangorestframework>=3.12",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/yourusername/rest_framework-stubs"
-"Bug Tracker" = "https://github.com/yourusername/rest_framework-stubs/issues"
+"Homepage" = "https://github.com/foxman2/rest_framework-stubs"
+"Bug Tracker" = "https://github.com/foxman2/rest_framework-stubs/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

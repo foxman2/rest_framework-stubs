@@ -2,62 +2,107 @@
 
 Type stubs for [Django REST Framework](https://www.django-rest-framework.org/).
 
-## Installation
+这个包为 Django REST Framework 提供类型声明（Type Stubs），让你可以在使用 mypy、pyright 等类型检查器时获得完整的类型提示。
 
-You can install this package from PyPI:
+## Installation 安装
+
+从 Git 仓库安装：
 
 ```bash
-pip install djangorestframework-stubs
+pip install git+https://github.com/foxman2/rest_framework-stubs.git@main
 ```
 
-## Usage
+或在 `requirements.txt` 中添加：
 
-This package provides type stubs for Django REST Framework. Once installed, type checkers like mypy will automatically use these stubs when analyzing code that uses Django REST Framework.
+```
+djangorestframework-stubs @ git+https://github.com/foxman2/rest_framework-stubs.git@main
+```
 
-### Example
+或在 `requirements-dev.txt` 中添加：
+
+```
+git+https://github.com/foxman2/rest_framework-stubs.git@main#egg=djangorestframework-stubs
+```
+
+## Usage 使用
+
+安装后，类型检查器会自动识别 Django REST Framework 的类型。你不需要额外的配置。
+
+### Example 示例
 
 ```python
-from rest_framework import serializers
+from rest_framework import serializers, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
-class MySerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=100)
+class UserSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=100)
     email = serializers.EmailField()
+    is_active = serializers.BooleanField(default=True)
+
+class UserViewSet(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    
+    @action(detail=True, methods=['post'])
+    def activate(self, request, pk=None):
+        # 现在你会得到完整的类型提示
+        return Response({'status': 'activated'})
 ```
 
-## Requirements
+### 配置 mypy
+
+在 `mypy.ini` 或 `setup.cfg` 中：
+
+```ini
+[mypy]
+plugins = mypy_django_plugin.main
+
+[mypy.plugins.django-stubs]
+django_settings_module = your_project.settings
+```
+
+### 配置 pyright
+
+在 `pyproject.toml` 中：
+
+```toml
+[tool.pyright]
+typeCheckingMode = "basic"
+```
+
+## Requirements 依赖
 
 - Python 3.7+
-- Django 3.2+
 - Django REST Framework 3.12+
 
-## Development
+## Development 开发
 
-To install for development:
+克隆并安装用于开发：
 
 ```bash
-git clone https://github.com/yourusername/rest_framework-stubs.git
+git clone https://github.com/foxman2/rest_framework-stubs.git
 cd rest_framework-stubs
 pip install -e .
 ```
 
-## Building and Publishing
+## Package Structure 包结构
 
-To build the package:
-
-```bash
-python -m build
+```
+rest_framework/
+├── __init__.pyi
+├── py.typed          # PEP 561 类型标记文件
+├── serializers.pyi   # Serializer 类型声明
+├── views.pyi         # View 类型声明
+├── viewsets.pyi      # ViewSet 类型声明
+├── fields.pyi        # Field 类型声明
+├── ...               # 其他模块的类型声明
+└── ...
 ```
 
-To publish to PyPI:
-
-```bash
-python -m twine upload dist/*
-```
-
-## License
+## License 许可证
 
 MIT License
 
-## Contributing
+## Contributing 贡献
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+欢迎提交 Pull Request 来改进类型声明！

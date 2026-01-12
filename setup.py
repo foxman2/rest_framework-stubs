@@ -11,8 +11,8 @@ setup(
     description="Type stubs for Django REST Framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/rest_framework-stubs",
-    packages=find_packages(),
+    url="https://github.com/foxman2/rest_framework-stubs",
+    packages=find_packages(include=["rest_framework", "rest_framework.*"]),
     package_data={
         "rest_framework": ["py.typed", "*.pyi"],
         "rest_framework.authtoken": ["*.pyi"],
@@ -24,6 +24,7 @@ setup(
         "rest_framework.templatetags": ["*.pyi"],
         "rest_framework.utils": ["*.pyi"],
     },
+    include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -38,7 +39,6 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "django>=3.2",
         "djangorestframework>=3.12",
     ],
     zip_safe=False,
